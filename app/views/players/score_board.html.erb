@@ -1,7 +1,7 @@
 
 <!-- container-->
 <div class="container">
-  <h1 class="my-4 text-center text-lg-left">LeaderBoard</h1>
+  <hr><h1 class="text-center">Score Board</h1><hr>
   <table class="table">
   <thead>
     <tr>
@@ -17,7 +17,7 @@
      <tr>
       <td><%= player.full_name %></td>
       <td><%= player.scores.count %></td>
-      <td><%= (player.scores.pluck(:points).sum / player.scores.pluck(:points).count).round%></td>
+      <td><%= player.scores.average(:points).round(2) %></td>
     </tr>
   <%end%>
   </tbody>

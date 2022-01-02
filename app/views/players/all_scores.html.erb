@@ -1,0 +1,26 @@
+
+<!-- container-->
+<div class="container">
+  <hr><h1 class="text-center">Total Scores</h1><hr>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Game</th>
+      <th>Status</th>
+      <th>Points</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scores.each do |score| %>
+     <tr>
+      <td><%= score.player.full_name %></td>
+      <td><%= score.game.title %></td>
+      <td><%= score.status.capitalize %></td>
+      <td><%= score.points %></td>
+    </tr>
+  <%end%>
+  </tbody>
+</table>

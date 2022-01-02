@@ -1,6 +1,7 @@
-<h1>Editing Game</h1>
+<div class="container">
+	<hr><h3 class="text-center">Edit Game</h3>
+	<%= render 'form', game: @game %>
 
-<%= render 'form', game: @game %>
-
-<%= link_to 'Show', @game %> |
-<%= link_to 'Back', games_path %>
+	<%= link_to 'Show', @game %> |
+	<%= link_to 'Back', games_path %>
+</div>

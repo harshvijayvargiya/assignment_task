@@ -1,0 +1,12 @@
+<div class="col-md-12 nopadd">
+	<section>
+		<div class="container">
+		<h1><strong>Assignment</strong></h1>
+			<h3><strong>
+				<% sidebar_menus.each do |sidebar_menu| %>
+					<a href="<%= sidebar_menu[:url] %>"><%= sidebar_menu[:name] %></a> |
+				<% end %>
+			</strong></h3>
+		</div>
+	</section>
+</div>

@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-  <h1>Players</h1>
+  <hr><h3 class="text-right"><%= link_to 'New Player', new_player_path %></h3>
+  <hr><h1 class="text-center">Player List</h1><hr>
   <table class="table">
     <thead>
       <tr>
@@ -19,15 +20,15 @@
           <td><%= player.join_date.strftime("%Y-%m-%d") %></td>
           <td><%= player.contact %></td>
           <td>
-            <%= link_to 'Show', player %> | 
-            <%= link_to 'Edit', edit_player_path(player) %> | 
+            <%= link_to 'Show', player %> |
+            <%= link_to 'Edit', edit_player_path(player) %> |
             <%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= link_to 'New Player', new_player_path %>
 </div>
 <br>
 
-<%= link_to 'New Player', new_player_path %>

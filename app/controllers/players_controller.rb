@@ -1,9 +1,15 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: %i[ show edit update destroy ]
+  before_action :set_player, only: %i[show edit update destroy]
 
+  # GET /players/score_board
   def score_board
-    players_ids = Player.joins(:scores).group('players.id').having("count(scores.id)>=10")
-    @players = Player.where(id: players_ids).includes(:scores).order("scores.points desc").limit(10)
+    ids = Player.top_avg_player
+    @players = Player.played_10_game(ids).limit(10)
+  end
+
+  # GET /players/all_scores
+  def all_scores
+    @scores = Score.includes(:game, :player).uniq
   end
 
   # GET /players or /players.json
@@ -13,19 +19,7 @@ class PlayersController < ApplicationController
 
   # GET /players/1 or /players/1.json
   def show
-    scores = @player.scores.order(points: :desc)
-    high_score = scores.first
-    @member_profile = {
-                        full_name: @player.full_name.capitalize,
-                        contact: @player.contact,
-                        no_of_wins: scores&.win&.count || 'NA',
-                        no_of_loss: scores&.loss&.count || 'NA',
-                        avg_score: scores.average(:points).to_f.round(2) || 0,
-                        high_score: high_score&.points || 0,
-                        when: high_score&.created_at&.strftime("%Y-%m-%d")|| 'NA',
-                        game: high_score&.title&.capitalize|| 'NA',
-                        whom: Score.where.not(player_id: @player.id).where(game_id: high_score&.game_id).first&.f_name&.capitalize || 'NA'  
-                      }
+    @member_profile = @player.member_profile
   end
 
   # GET /players/new
@@ -34,8 +28,7 @@ class PlayersController < ApplicationController
   end
 
   # GET /players/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /players or /players.json
   def create
@@ -43,7 +36,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to player_url(@player), notice: "Player was successfully created." }
+        format.html { redirect_to player_url(@player), notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -56,7 +49,7 @@ class PlayersController < ApplicationController
   def update
     respond_to do |format|
       if @player.update(player_params)
-        format.html { redirect_to player_url(@player), notice: "Player was successfully updated." }
+        format.html { redirect_to player_url(@player), notice: 'Player was successfully updated.' }
         format.json { render :show, status: :ok, location: @player }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -70,19 +63,20 @@ class PlayersController < ApplicationController
     @player.destroy
 
     respond_to do |format|
-      format.html { redirect_to players_url, notice: "Player was successfully destroyed." }
+      format.html { redirect_to players_url, notice: 'Player was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_player
-      @player = Player.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def player_params
-      params.require(:player).permit(:f_name, :l_name, :join_date, :contact)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_player
+    @player = Player.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def player_params
+    params.require(:player).permit(:f_name, :l_name, :join_date, :contact)
+  end
 end

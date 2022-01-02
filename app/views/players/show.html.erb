@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
+  <hr><h3 class="text-right"><%= link_to 'Edit', edit_player_path(@player) %> |
+  <%= link_to 'Back', players_path %></h3>
+  <hr><h1 class="text-center">Member Profile</h1><hr>
   <table class="table">
     <thead>
       <tr>
@@ -14,7 +17,7 @@
         <th scope="col">Against whom</th>
       </tr>
     </thead>
-    <tbody> 
+    <tbody>
       <tr>
         <td><%= @member_profile[:full_name]%></td>
         <td><%= @member_profile[:contact]%></td>
@@ -25,10 +28,8 @@
         <td><%= @member_profile[:when]%></td>
         <td><%= @member_profile[:game]%></td>
         <td><%= @member_profile[:whom]%></td>
-      </tr>    
+      </tr>
     </tbody>
   </table>
 </div>
 
-<%= link_to 'Edit', edit_player_path(@player) %> |
-<%= link_to 'Back', players_path %>

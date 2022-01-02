@@ -6,9 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 50.times do
-	Player.create(f_name: Faker::Name.unique.first_name, l_name: Faker::Name.unique.last_name, contact: Faker::PhoneNumber.cell_phone, join_date: Faker::Date.in_date_period(month: 1))
+  Player.create(f_name: Faker::Name.unique.first_name, l_name: Faker::Name.unique.last_name,
+                contact: Faker::PhoneNumber.cell_phone, join_date: Faker::Date.in_date_period(month: 1))
 end
 
 500.times do
-	Game.create(title: Faker::Company.name, begin_date: Faker::Date.in_date_period(month: 1), end_date: Faker::Date.in_date_period(month: 1))
+  Game.create(title: Faker::Company.name, begin_date: Faker::Date.in_date_period(month: 1),
+              end_date: Faker::Date.in_date_period(month: 1))
 end
