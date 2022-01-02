@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Number of wins</th>
+        <th scope="col">Number of losses</th>
+        <th scope="col">Average score</th>
+        <th scope="col">Highest score</th>
+        <th scope="col">when</th>
+        <th scope="col">Game Name</th>
+        <th scope="col">Against whom</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr>
+        <td><%= @member_profile[:full_name]%></td>
+        <td><%= @member_profile[:contact]%></td>
+        <td><%= @member_profile[:no_of_wins]%></td>
+        <td><%= @member_profile[:no_of_loss]%></td>
+        <td><%= @member_profile[:avg_score]%></td>
+        <td><%= @member_profile[:high_score]%></td>
+        <td><%= @member_profile[:when]%></td>
+        <td><%= @member_profile[:game]%></td>
+        <td><%= @member_profile[:whom]%></td>
+      </tr>    
+    </tbody>
+  </table>
+</div>
+
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Back', players_path %>

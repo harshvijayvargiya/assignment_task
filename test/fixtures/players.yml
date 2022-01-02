@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  f_name: MyString
+  l_name: MyString
+  join_date: 2021-12-31 13:15:08
+  contact: 1
+
+two:
+  f_name: MyString
+  l_name: MyString
+  join_date: 2021-12-31 13:15:08
+  contact: 1

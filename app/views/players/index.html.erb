@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <h1>Players</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Join date</th>
+        <th scope="col">Contact</th>
+        <th colspan="3">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @players.each do |player| %>
+        <tr>
+          <td><%= player.full_name %></td>
+          <td><%= player.join_date.strftime("%Y-%m-%d") %></td>
+          <td><%= player.contact %></td>
+          <td>
+            <%= link_to 'Show', player %> | 
+            <%= link_to 'Edit', edit_player_path(player) %> | 
+            <%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'New Player', new_player_path %>

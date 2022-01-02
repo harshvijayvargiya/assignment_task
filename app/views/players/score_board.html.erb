@@ -1,0 +1,24 @@
+
+<!-- container-->
+<div class="container">
+  <h1 class="my-4 text-center text-lg-left">LeaderBoard</h1>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>No of Game</th>
+      <th>Aaverage Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @players.each do |player| %>
+     <tr>
+      <td><%= player.full_name %></td>
+      <td><%= player.scores.count %></td>
+      <td><%= (player.scores.pluck(:points).sum / player.scores.pluck(:points).count).round%></td>
+    </tr>
+  <%end%>
+  </tbody>
+</table>
